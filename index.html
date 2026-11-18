@@ -35,6 +35,15 @@ select{width:100%;padding:13px;border-radius:10px;background:#242436;color:white
 <p>La tua intelligenza artificiale personale per trovare i momenti migliori.</p>
 
 <div class="panel">
+<h3>🔗 Importa da YouTube o Twitch</h3>
+<p>Incolla il link del video che vuoi trasformare in clip.</p>
+<input id="videoUrl" type="url"
+placeholder="https://youtube.com/... oppure twitch.tv/..."
+style="width:100%;padding:15px;border-radius:12px;background:#242436;color:white;border:1px solid #555;margin-top:12px"/>
+<p id="linkStatus" class="small">Nessun link inserito</p>
+</div>
+
+<div class="panel">
 <h3>🎬 Carica un video</h3>
 <p>Seleziona un video dalla memoria del tuo iPhone.</p>
 <div class="upload">
@@ -76,6 +85,35 @@ MYCLIP AI · La tua IA, le tue clip.
 
 <script>
 const video=document.getElementById('video');
+
+const videoUrl = document.getElementById('videoUrl');
+const linkStatus = document.getElementById('linkStatus');
+
+videoUrl.addEventListener('input', () => {
+  const value = videoUrl.value.trim();
+
+  if (!value) {
+    linkStatus.textContent = 'Nessun link inserito';
+    return;
+  }
+
+  try {
+    const url = new URL(value);
+    const host = url.hostname.toLowerCase();
+
+    const valid =
+      ['youtube.com', 'www.youtube.com', 'm.youtube.com', 'youtu.be',
+       'twitch.tv', 'www.twitch.tv', 'clips.twitch.tv']
+      .includes(host);
+
+    linkStatus.textContent = valid
+      ? '✓ Link riconosciuto. Pronto per il motore di importazione.'
+      : 'Link non riconosciuto: usa YouTube o Twitch.';
+  } catch {
+    linkStatus.textContent = 'Inserisci un indirizzo web valido.';
+  }
+});
+
 const result=document.getElementById('result');
 
 video.addEventListener('change',()=>{
