@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#09090f">
+<title>MYCLIP AI</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#09090f;color:white;font-family:Arial,sans-serif;padding:22px}
+header{display:flex;justify-content:space-between;align-items:center;margin:15px 0 35px}
+.logo{font-size:25px;font-weight:900;letter-spacing:-1px}
+.logo span{color:#a78bfa}
+.status{font-size:11px;color:#86efac;background:#14251c;padding:8px 12px;border-radius:20px}
+h1{font-size:32px;margin:0 0 10px}
+p{color:#999;line-height:1.5}
+.panel{background:#151520;border:1px solid #29293b;border-radius:18px;padding:19px;margin-top:20px}
+.upload{border:2px dashed #55516d;border-radius:15px;padding:30px 15px;text-align:center;margin-top:15px}
+.upload label{display:block;color:#c4b5fd;font-weight:bold;cursor:pointer}
+input[type=file]{display:none}
+button{border:0;border-radius:12px;padding:15px;background:#8b5cf6;color:white;font-weight:bold;width:100%;font-size:15px;margin-top:16px}
+select{width:100%;padding:13px;border-radius:10px;background:#242436;color:white;border:1px solid #444;margin-top:9px}
+.result{margin-top:20px;padding:15px;border-radius:12px;background:#201d32;display:none;overflow-wrap:anywhere}
+.small{font-size:12px;color:#999}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">MYCLIP<span> AI</span></div>
+<div class="status">● PROGETTO ATTIVO</div>
+</header>
+
+<h1>Trasforma i tuoi video in clip.</h1>
+<p>La tua intelligenza artificiale personale per trovare i momenti migliori.</p>
+
+<div class="panel">
+<h3>🎬 Carica un video</h3>
+<p>Seleziona un video dalla memoria del tuo iPhone.</p>
+<div class="upload">
+<label for="video">＋ Scegli un video</label>
+<input id="video" type="file" accept="video/*">
+<p id="filename" class="small">Nessun video selezionato</p>
+</div>
+</div>
+
+<div class="panel">
+<h3>⚙️ Impostazioni clip</h3>
+<label>Formato video</label>
+<select id="format">
+<option>Verticale 9:16</option>
+<option>Quadrato 1:1</option>
+<option>Orizzontale 16:9</option>
+</select>
+<br><br>
+<label>Durata desiderata</label>
+<select id="duration">
+<option>30 secondi</option>
+<option>45 secondi</option>
+<option>60 secondi</option>
+</select>
+<br><br>
+<label>Sottotitoli</label>
+<select id="subs">
+<option>Italiano</option>
+<option>Inglese</option>
+<option>Nessuno</option>
+</select>
+<button id="start">✨ ANALIZZA IL MIO VIDEO</button>
+<div class="result" id="result"></div>
+</div>
+
+<p class="small" style="text-align:center;margin-top:35px">
+MYCLIP AI · La tua IA, le tue clip.
+</p>
+
+<script>
+const video=document.getElementById('video');
+const result=document.getElementById('result');
+
+video.addEventListener('change',()=>{
+document.getElementById('filename').textContent=
+video.files[0]?.name || 'Nessun video selezionato';
+});
+
+document.getElementById('start').addEventListener('click',()=>{
+if(!video.files.length){
+alert('Seleziona prima un video!');
+return;
+}
+result.style.display='block';
+result.innerHTML='<b>🎬 Video caricato correttamente!</b><p>MYCLIP AI è pronta per il prossimo passaggio: costruire il motore intelligente che analizzerà il video e creerà le clip.</p><p class="small">Questo è il prototipo dell’interfaccia: l’elaborazione IA sarà implementata nei prossimi passaggi.</p>';
+});
+</script>
+</body>
+</html>
